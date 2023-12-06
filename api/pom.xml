@@ -10,7 +10,7 @@
     </parent>
 
     <groupId>app</groupId>
-    <artifactId>TelegramGPTBot</artifactId>
+    <artifactId>api</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>TelegramGPTBot</name>
     <description>TelegramGPTBot</description>

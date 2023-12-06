@@ -1,7 +1,8 @@
-FROM node:18
+FROM node:16
 WORKDIR /usr/src/app
 COPY package.json .
-RUN npm install
+RUN npm i -g @angular/cli@~16.2.4
+RUN npm i
 COPY . .
-CMD npm run start
-EXPOSE 4200
+RUN ng build
+CMD ng serve --host 0.0.0.0

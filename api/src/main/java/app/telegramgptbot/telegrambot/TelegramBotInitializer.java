@@ -1,5 +1,6 @@
 package app.telegramgptbot.telegrambot;
 
+import app.telegramgptbot.telegrambot.exception.TelegramApiInitException;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
@@ -22,7 +23,8 @@ public class TelegramBotInitializer {
         try {
             telegramBotsApi.registerBot(telegramBot);
         } catch (TelegramApiException e) {
-            throw new RuntimeException("");
+            throw new TelegramApiInitException("TelegramApi registration failed. "
+                    + "Reason: " + e.getMessage());
         }
     }
 }
