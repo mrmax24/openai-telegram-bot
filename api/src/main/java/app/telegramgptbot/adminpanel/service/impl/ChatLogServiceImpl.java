@@ -1,9 +1,6 @@
 package app.telegramgptbot.adminpanel.service.impl;
 
-import app.telegramgptbot.adminpanel.dto.chatlog.ChatLogByIdDto;
-import app.telegramgptbot.adminpanel.dto.chatlog.ChatLogListDto;
-import app.telegramgptbot.adminpanel.dto.chatlog.ChatLogRequestDto;
-import app.telegramgptbot.adminpanel.dto.chatlog.ChatLogResponseDto;
+import app.telegramgptbot.adminpanel.dto.chatlog.*;
 import app.telegramgptbot.adminpanel.mapper.ChatLogMapper;
 import app.telegramgptbot.adminpanel.model.ChatLog;
 import app.telegramgptbot.adminpanel.repository.ChatLogRepository;
@@ -35,6 +32,11 @@ public class ChatLogServiceImpl implements ChatLogService {
     @Override
     public List<ChatLogListDto> getChatList() {
        return chatLogRepository.getChatList();
+    }
+
+    @Override
+    public List<MessagesLogsDto> getMessageList() {
+        return chatLogRepository.getMessagesList();
     }
 
     @Override

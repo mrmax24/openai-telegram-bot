@@ -6,6 +6,7 @@ import app.telegramgptbot.adminpanel.dto.chatlog.ChatLogByIdDto;
 import app.telegramgptbot.adminpanel.dto.chatlog.ChatLogListDto;
 import app.telegramgptbot.adminpanel.dto.admin.AdminMessageRequestDto;
 import app.telegramgptbot.adminpanel.dto.chatlog.ChatLogResponseDto;
+import app.telegramgptbot.adminpanel.dto.chatlog.MessagesLogsDto;
 import app.telegramgptbot.adminpanel.mapper.AdminMapper;
 import app.telegramgptbot.adminpanel.mapper.AdminMessageMapper;
 import app.telegramgptbot.adminpanel.model.Admin;
@@ -41,6 +42,11 @@ public class AdminPanelController {
     @GetMapping("/{id}")
     public List<ChatLogByIdDto> getLogsByChatId(@PathVariable Long id) {
         return chatLogService.getLogsByChatId(id);
+    }
+
+    @GetMapping("/messages")
+    public List<MessagesLogsDto> getLogsByChatIdForMessagesPage() {
+        return chatLogService.getMessageList();
     }
 
     @PostMapping("/reply/{id}")

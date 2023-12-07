@@ -17,7 +17,8 @@ public class StartCommand implements Command {
     @Override
     public void execute() {
         String answer = "Hi, " + name + ", nice to meet you! "
-                + "You can ask any questions to the GPT chat or use other commands:";
+                + "Write any questions to the chat and get AI generated "
+                + "response or use other commands from the menu";
         telegramBot.sendMessage(chatId, answer);
     }
 }

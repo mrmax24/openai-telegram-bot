@@ -2,6 +2,8 @@
 <body>
 <div class="header-container">
   <div class="site-name">TGBot Admin panel</div>
+  <div class="messages-link"><a [routerLink]="['/messages']">Messages</a></div>
+
   <div class="user-info" style="text-align: right;">
     <span>{{ admin?.email }}</span>
     <button (click)="logout()" class="logout-button">Logout</button>
@@ -28,7 +30,7 @@
       <td class="message-response-time-column">{{ log.userMessageTime | date: 'yyyy-MM-dd HH:mm:ss' }}</td>
       <td class="message-column">{{ log.userMessage }}</td>
       <td class="chat-response-time-column">{{ log.chatResponseTime | date: 'yyyy-MM-dd HH:mm:ss' }}</td>
-      <td class="chatgpt-responses-column">{{ log.chatResponse }}</td>
+      <td class="chatgpt-responses-column">{{ log.chatResponse ? log.chatResponse : '...' }}</td>
       <td class="admin-response-time-column">
         <ng-container *ngIf="log.adminResponseTime; else noData">
           {{ log.adminResponseTime | date: 'yyyy-MM-dd HH:mm:ss' }}

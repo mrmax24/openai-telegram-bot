@@ -3,6 +3,7 @@ package app.telegramgptbot.telegrambot;
 import app.telegramgptbot.adminpanel.dto.chatlog.ChatLogRequestDto;
 import app.telegramgptbot.adminpanel.service.ChatLogService;
 import app.telegramgptbot.telegrambot.command.Command;
+import app.telegramgptbot.telegrambot.command.MessageAdmin;
 import app.telegramgptbot.telegrambot.command.SendMessageCommand;
 import app.telegramgptbot.telegrambot.command.StartCommand;
 import app.telegramgptbot.telegrambot.config.TelegramBotConfig;
@@ -26,6 +27,7 @@ import java.sql.Timestamp;
 @Component
 public class TelegramBot extends TelegramLongPollingBot {
     private static final String COMMAND_START = "/start";
+    private static final String COMMAND_MESSAGE_ADMIN = "/admin";
     private final TelegramBotConfig telegramBotConfig;
     private final ChatGptService chatGptService;
     private final ChatLogService chatLogService;
@@ -55,17 +57,28 @@ public class TelegramBot extends TelegramLongPollingBot {
         User user = message.getFrom();
         String userName = user.getUserName();
         String fullName = getFullName(user);
+        String chatGptResponse = null;
+        long chatGptResponseTime = 0;
 
         try {
             sendTypingAction(chatId);
-            String chatGptResponse = chatGptService.getChatGptResponse(userMessage);
-            long chatGptResponseTime = System.currentTimeMillis();
-
+            Command command;
+            switch (userMessage) {
+                case (COMMAND_START):
+                    command = new StartCommand(chatId, fullName, this);
+                    break;
+                case COMMAND_MESSAGE_ADMIN:
+                    command = new MessageAdmin(chatId, this);
+                    break;
+                default:
+                    chatGptResponse = chatGptService.getChatGptResponse(userMessage);
+                    chatGptResponseTime = System.currentTimeMillis();
+                    command = new SendMessageCommand(chatId, chatGptResponse, this);
+                    break;
+            }
+            command.execute();
             saveChatLog(chatId, userName, fullName, userMessage, chatGptResponse,
                     userMessageReceivedTime, chatGptResponseTime);
-
-            Command command = determineCommand(userMessage, chatId, fullName, chatGptResponse);
-            command.execute();
         } catch (Exception e) {
             throw new UpdateProcessingException("Error processing the received update. "
                     + "Reason: " + e.getMessage());
@@ -74,7 +87,8 @@ public class TelegramBot extends TelegramLongPollingBot {
 
     private String getFullName(User user) {
         String firstName = user.getFirstName();
-        String lastName = user.getLastName();
+        String lastName = (user.getLastName() != null && !user.getLastName().isEmpty())
+                ? user.getLastName() : " ";
         return String.format("%s %s", firstName, lastName);
     }
 
@@ -84,16 +98,6 @@ public class TelegramBot extends TelegramLongPollingBot {
         chatLogService.save(new ChatLogRequestDto(chatId, userName, fullName, userMessage,
                 chatGptResponse, new Timestamp(userMessageReceivedTime).toLocalDateTime(),
                 new Timestamp(chatGptResponseTime).toLocalDateTime()));
-    }
-
-    private Command determineCommand(String userMessage, Long chatId,
-                                     String fullName, String chatGptResponse) {
-        switch (userMessage) {
-            case COMMAND_START:
-                return new StartCommand(chatId, fullName, this);
-            default:
-                return new SendMessageCommand(chatId, chatGptResponse, this);
-        }
     }
 
     private void sendTypingAction(long chatId) {

@@ -2,6 +2,7 @@
 <body>
 <div class="header-container">
   <div class="site-name">TGBot Admin panel</div>
+  <div class="messages-link"><a [routerLink]="['/messages']">Messages</a></div>
   <div class="user-info" style="text-align: right;">
     <span>{{ admin?.email }}</span>
     <button (click)="logout()" class="logout-button">Logout</button>

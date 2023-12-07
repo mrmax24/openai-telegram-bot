@@ -2,6 +2,7 @@ package app.telegramgptbot.adminpanel.repository;
 
 import app.telegramgptbot.adminpanel.dto.chatlog.ChatLogByIdDto;
 import app.telegramgptbot.adminpanel.dto.chatlog.ChatLogListDto;
+import app.telegramgptbot.adminpanel.dto.chatlog.MessagesLogsDto;
 import app.telegramgptbot.adminpanel.model.ChatLog;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -36,4 +37,10 @@ public interface ChatLogRepository extends JpaRepository<ChatLog, Long> {
             + "FROM ChatLog c "
             + "WHERE c.chatId = :chatId")
     List<ChatLogByIdDto> getLogsByChatId(Long chatId);
+
+    @Query("SELECT DISTINCT new app.telegramgptbot.adminpanel.dto.chatlog.MessagesLogsDto("
+            + "c.id, c.fullUsername, c.userMessageTime, c.userMessage, "
+            + "c.adminResponseTime, c.adminResponse) "
+            + "FROM ChatLog c JOIN ChatLog c2 ON c2.userMessage = '/admin' AND c.userMessageTime > c2.userMessageTime ORDER BY c.userMessageTime ASC")
+    List<MessagesLogsDto> getMessagesList();
 }

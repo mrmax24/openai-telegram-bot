@@ -12,6 +12,7 @@ import { RegisterComponent } from './register/register.component';
 import { PanelComponent } from './panel/panel.component';
 import { LogsComponent } from './logs/logs.component';
 import { MessagePopupComponent } from './message-popup/message-popup.component';
+import { MessagesComponent } from './messages/messages.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { MessagePopupComponent } from './message-popup/message-popup.component';
     RegisterComponent,
     PanelComponent,
     LogsComponent,
-    MessagePopupComponent
+    MessagePopupComponent,
+    MessagesComponent
   ],
   imports: [
     BrowserModule,

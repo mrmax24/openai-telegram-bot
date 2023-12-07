@@ -5,6 +5,7 @@ import {AuthGuard} from "./auth.guard";
 import { RegisterComponent } from './register/register.component';
 import { PanelComponent } from './panel/panel.component';
 import { LogsComponent } from './logs/logs.component';
+import {MessagesComponent} from "./messages/messages.component";
 
 
 const routes: Routes = [
@@ -12,6 +13,7 @@ const routes: Routes = [
   { path: 'auth/login', component: AuthComponent },
   { path: '', component: PanelComponent, canActivate: [AuthGuard] },
   { path: 'logs/:chatId', component: LogsComponent },
+  { path: 'messages', component: MessagesComponent },
 ];
 
 @NgModule({

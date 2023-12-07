@@ -80,3 +80,16 @@ div > span, div > button {
   cursor: pointer;
   text-decoration: underline;
 }
+
+.messages-link a {
+  color: #ffffff;
+  text-decoration: none;
+  font-weight: bold;
+  transition: text-decoration 0.3s;
+  margin-right: 700px;
+  font-size: 16px;
+}
+
+.messages-link a:hover {
+  text-decoration: underline;
+}
