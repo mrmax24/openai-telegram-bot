@@ -17,8 +17,6 @@
       <th>Name</th>
       <th>Message time</th>
       <th>Message</th>
-      <th>Admin Response time</th>
-      <th>Admin Responses</th>
       <th></th>
     </tr>
     </thead>
@@ -27,13 +25,6 @@
       <td class="name-column">{{ log.fullUsername ? log.fullUsername : '...' }}</td>
       <td class="message-response-time-column">{{ log.userMessageTime | date: 'yyyy-MM-dd HH:mm:ss' }}</td>
       <td class="message-column">{{ log.userMessage.startsWith('toAdmin: ') ? log.userMessage.substring('toAdmin: '.length) : log.userMessage }}</td>
-      <td class="admin-response-time-column">
-        <ng-container *ngIf="log.adminResponseTime; else noData">
-          {{ log.adminResponseTime | date: 'yyyy-MM-dd HH:mm:ss' }}
-        </ng-container>
-        <ng-template #noData>...</ng-template>
-      </td>
-      <td class="admin-responses-column">{{ log.adminResponse ? log.adminResponse : '...' }}</td>
       <td class="send-column">
         <button (click)="openPopup(log.id)">Send message</button>
       </td>

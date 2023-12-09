@@ -11,6 +11,7 @@ import app.telegramgptbot.telegrambot.exception.ChatActionProcessingException;
 import app.telegramgptbot.telegrambot.exception.UpdateProcessingException;
 import app.telegramgptbot.telegrambot.service.ChatGptService;
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -111,9 +112,12 @@ public class TelegramBot extends TelegramLongPollingBot {
     private void saveChatLog(Long chatId, String userName, String fullName, String userMessage,
                              String chatGptResponse, long userMessageReceivedTime,
                              long chatGptResponseTime) {
+        LocalDateTime checkedChatGptResponseTime = (chatGptResponseTime != 0)
+                ? new Timestamp(chatGptResponseTime).toLocalDateTime()
+                : null;
         chatLogService.save(new ChatLogRequestDto(chatId, userName, fullName, userMessage,
                 chatGptResponse, new Timestamp(userMessageReceivedTime).toLocalDateTime(),
-                new Timestamp(chatGptResponseTime).toLocalDateTime()));
+                checkedChatGptResponseTime));
     }
 
     private void sendTypingAction(long chatId) {
