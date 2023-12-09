@@ -10,6 +10,10 @@ import app.telegramgptbot.telegrambot.config.TelegramBotConfig;
 import app.telegramgptbot.telegrambot.exception.ChatActionProcessingException;
 import app.telegramgptbot.telegrambot.exception.UpdateProcessingException;
 import app.telegramgptbot.telegrambot.service.ChatGptService;
+import java.sql.Timestamp;
+import java.util.HashMap;
+import java.util.Map;
+
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
@@ -21,16 +25,18 @@ import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.api.objects.User;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
-import java.sql.Timestamp;
-
 @RequiredArgsConstructor
 @Component
 public class TelegramBot extends TelegramLongPollingBot {
     private static final String COMMAND_START = "/start";
     private static final String COMMAND_MESSAGE_ADMIN = "/admin";
+    private static final String TO_ADMIN = "toAdmin: ";
+    private static final String MESSAGE_FOR_USER = "Your message was sent to admin."
+            + " We will reply shortly.";
     private final TelegramBotConfig telegramBotConfig;
     private final ChatGptService chatGptService;
     private final ChatLogService chatLogService;
+    private Map<Long, Boolean> adminMessagePending = new HashMap<>();
 
     @Override
     public String getBotUsername() {
@@ -63,22 +69,32 @@ public class TelegramBot extends TelegramLongPollingBot {
         try {
             sendTypingAction(chatId);
             Command command;
-            switch (userMessage) {
-                case (COMMAND_START):
-                    command = new StartCommand(chatId, fullName, this);
-                    break;
-                case COMMAND_MESSAGE_ADMIN:
-                    command = new MessageAdmin(chatId, this);
-                    break;
-                default:
-                    chatGptResponse = chatGptService.getChatGptResponse(userMessage);
-                    chatGptResponseTime = System.currentTimeMillis();
-                    command = new SendMessageCommand(chatId, chatGptResponse, this);
-                    break;
+
+            if (adminMessagePending.containsKey(chatId) && adminMessagePending.get(chatId)) {
+                command = new SendMessageCommand(chatId, MESSAGE_FOR_USER, this);
+                adminMessagePending.put(chatId, false);
+                saveChatLog(chatId, userName, fullName, TO_ADMIN + userMessage, null,
+                        userMessageReceivedTime, chatGptResponseTime);
+
+            } else {
+                switch (userMessage) {
+                    case COMMAND_START:
+                        command = new StartCommand(chatId, fullName, this);
+                        break;
+                    case COMMAND_MESSAGE_ADMIN:
+                        command = new MessageAdmin(chatId, this);
+                        adminMessagePending.put(chatId, true);
+                        break;
+                    default:
+                        chatGptResponse = chatGptService.getChatGptResponse(userMessage);
+                        chatGptResponseTime = System.currentTimeMillis();
+                        command = new SendMessageCommand(chatId, chatGptResponse, this);
+                        saveChatLog(chatId, userName, fullName, userMessage, chatGptResponse,
+                                userMessageReceivedTime, chatGptResponseTime);
+                        break;
+                }
             }
             command.execute();
-            saveChatLog(chatId, userName, fullName, userMessage, chatGptResponse,
-                    userMessageReceivedTime, chatGptResponseTime);
         } catch (Exception e) {
             throw new UpdateProcessingException("Error processing the received update. "
                     + "Reason: " + e.getMessage());

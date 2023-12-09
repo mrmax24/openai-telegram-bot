@@ -40,6 +40,7 @@ app\telegramgptbot\adminpanel\validation\FieldsValueMatchValidator.class
 app\telegramgptbot\adminpanel\mapper\LoginMapper.class
 app\telegramgptbot\adminpanel\controller\AdminPanelController.class
 app\telegramgptbot\adminpanel\dto\chatlog\ChatLogResponseDto.class
+app\telegramgptbot\adminpanel\dto\chatlog\MessagesLogsDto.class
 app\telegramgptbot\adminpanel\mapper\AdminMapper.class
 app\telegramgptbot\adminpanel\model\ChatLog.class
 app\telegramgptbot\telegrambot\config\TelegramBotConfig.class
@@ -59,4 +60,5 @@ app\telegramgptbot\telegrambot\config\OpenAiConfig.class
 app\telegramgptbot\adminpanel\exception\AuthenticationException.class
 app\telegramgptbot\adminpanel\exception\EntityNotFoundException.class
 app\telegramgptbot\adminpanel\security\AuthenticationService.class
+app\telegramgptbot\telegrambot\command\MessageAdmin.class
 app\telegramgptbot\adminpanel\mapper\AdminMessageMapper.class

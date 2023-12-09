@@ -4,11 +4,10 @@ import app.telegramgptbot.adminpanel.dto.chatlog.ChatLogByIdDto;
 import app.telegramgptbot.adminpanel.dto.chatlog.ChatLogListDto;
 import app.telegramgptbot.adminpanel.dto.chatlog.MessagesLogsDto;
 import app.telegramgptbot.adminpanel.model.ChatLog;
+import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
-
-import java.util.List;
 
 @Repository
 public interface ChatLogRepository extends JpaRepository<ChatLog, Long> {
@@ -29,18 +28,20 @@ public interface ChatLogRepository extends JpaRepository<ChatLog, Long> {
             + "ORDER BY MAX(c.userMessageTime) DESC")
     List<ChatLogListDto> getChatList();
 
-
     @Query("SELECT new app.telegramgptbot.adminpanel.dto.chatlog.ChatLogByIdDto("
             + "c.id, c.fullUsername, c.userMessageTime, c.userMessage, "
             + "c.chatResponseTime, c.chatResponse, "
             + "c.adminResponseTime, c.adminResponse) "
             + "FROM ChatLog c "
-            + "WHERE c.chatId = :chatId")
+            + "WHERE c.chatId = :chatId "
+            + "GROUP BY c.id "
+            + "ORDER BY MAX(c.userMessageTime) DESC")
     List<ChatLogByIdDto> getLogsByChatId(Long chatId);
 
-    @Query("SELECT DISTINCT new app.telegramgptbot.adminpanel.dto.chatlog.MessagesLogsDto("
+    @Query("SELECT new app.telegramgptbot.adminpanel.dto.chatlog.MessagesLogsDto("
             + "c.id, c.fullUsername, c.userMessageTime, c.userMessage, "
             + "c.adminResponseTime, c.adminResponse) "
-            + "FROM ChatLog c JOIN ChatLog c2 ON c2.userMessage = '/admin' AND c.userMessageTime > c2.userMessageTime ORDER BY c.userMessageTime ASC")
+            + "FROM ChatLog c "
+            + "WHERE c.userMessage LIKE 'toAdmin:%' AND c.adminResponse = null")
     List<MessagesLogsDto> getMessagesList();
 }

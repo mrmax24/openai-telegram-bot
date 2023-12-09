@@ -1,7 +1,6 @@
 package app.telegramgptbot.telegrambot.command;
 
 import app.telegramgptbot.telegrambot.TelegramBot;
-import app.telegramgptbot.telegrambot.command.Command;
 
 public class SendMessageCommand implements Command {
     private final Long chatId;

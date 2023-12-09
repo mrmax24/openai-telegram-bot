@@ -1,7 +1,7 @@
 package app.telegramgptbot.adminpanel.security;
 
-import app.telegramgptbot.adminpanel.repository.AdminRepository;
 import app.telegramgptbot.adminpanel.exception.RegistrationException;
+import app.telegramgptbot.adminpanel.repository.AdminRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

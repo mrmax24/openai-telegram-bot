@@ -10,6 +10,7 @@ public class EmailValidator implements ConstraintValidator<Email, String> {
     @Override
     public void initialize(Email constraintAnnotation) {
     }
+
     @Override
     public boolean isValid(String field, ConstraintValidatorContext context) {
         return field != null && field.matches(EMAIL_VALIDATION_REGEX);

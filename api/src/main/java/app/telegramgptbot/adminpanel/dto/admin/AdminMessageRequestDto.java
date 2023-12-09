@@ -6,5 +6,5 @@ import lombok.Getter;
 @Getter
 public class AdminMessageRequestDto {
     @NotEmpty
-    String adminResponse;
+    private String adminResponse;
 }

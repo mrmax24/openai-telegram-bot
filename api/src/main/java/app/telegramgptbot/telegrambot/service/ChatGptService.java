@@ -53,7 +53,8 @@ public class ChatGptService {
                     return firstChoice.getJSONObject("message").getString("content");
                 }
             }
-            throw new OpenAiResponseException("Invalid JSON response structure: missing adminResponse");
+            throw new OpenAiResponseException("Invalid JSON response structure:"
+                    + " missing adminResponse");
         } catch (JSONException jsonException) {
             throw new OpenAiResponseException("Error processing JSON response" + jsonException);
         } catch (Exception e) {

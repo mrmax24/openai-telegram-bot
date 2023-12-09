@@ -2,7 +2,6 @@ package app.telegramgptbot.adminpanel.validation;
 
 import jakarta.validation.Constraint;
 import jakarta.validation.Payload;
-
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -14,8 +13,8 @@ import java.lang.annotation.Target;
 @Target({ElementType.FIELD})
 @Retention(RetentionPolicy.RUNTIME)
 public @interface Password {
-    String message() default "Password must contain at least one lowercase letter," +
-            " one uppercase letter, one digit, and one special character (@_#$%^&+=)";
+    String message() default "Password must contain at least one lowercase letter,"
+            + " one uppercase letter, one digit, and one special character (@_#$%^&+=)";
 
     Class<?>[] groups() default {};
 

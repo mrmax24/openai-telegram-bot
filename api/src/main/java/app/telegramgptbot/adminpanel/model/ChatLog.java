@@ -1,11 +1,14 @@
 package app.telegramgptbot.adminpanel.model;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import java.time.LocalDateTime;
 import lombok.AllArgsConstructor;
 import lombok.Data;
-
-
-import java.time.LocalDateTime;
 
 @Data
 @AllArgsConstructor
@@ -35,14 +38,13 @@ public class ChatLog {
     private String adminResponse;
 
     @Column(name = "user_message_time")
-    private LocalDateTime  userMessageTime;
+    private LocalDateTime userMessageTime;
 
     @Column(name = "chat_message_time")
-    private LocalDateTime  chatResponseTime;
+    private LocalDateTime chatResponseTime;
 
     @Column(name = "admin_message_time")
     private LocalDateTime adminResponseTime;
-
 
     public ChatLog() {
     }

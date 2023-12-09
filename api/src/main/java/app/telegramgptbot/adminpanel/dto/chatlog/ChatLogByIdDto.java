@@ -1,10 +1,8 @@
 package app.telegramgptbot.adminpanel.dto.chatlog;
 
+import java.time.LocalDateTime;
 import lombok.AllArgsConstructor;
 import lombok.Data;
-
-import java.time.LocalDateTime;
-
 
 @Data
 @AllArgsConstructor

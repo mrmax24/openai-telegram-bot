@@ -1,6 +1,7 @@
 E:\IdeaProjects\ai-tgbot\api\src\main\java\app\telegramgptbot\adminpanel\config\MapperConfig.java
 E:\IdeaProjects\ai-tgbot\api\src\main\java\app\telegramgptbot\adminpanel\mapper\RegisterMapper.java
 E:\IdeaProjects\ai-tgbot\api\src\main\java\app\telegramgptbot\adminpanel\dto\admin\AdminRegisterResponseDto.java
+E:\IdeaProjects\ai-tgbot\api\src\main\java\app\telegramgptbot\adminpanel\dto\chatlog\MessagesLogsDto.java
 E:\IdeaProjects\ai-tgbot\api\src\main\java\app\telegramgptbot\adminpanel\repository\AdminRepository.java
 E:\IdeaProjects\ai-tgbot\api\src\main\java\app\telegramgptbot\adminpanel\security\JwtUtil.java
 E:\IdeaProjects\ai-tgbot\api\src\main\java\app\telegramgptbot\adminpanel\service\impl\AdminServiceImpl.java
@@ -52,6 +53,7 @@ E:\IdeaProjects\ai-tgbot\api\src\main\java\app\telegramgptbot\telegrambot\comman
 E:\IdeaProjects\ai-tgbot\api\src\main\java\app\telegramgptbot\adminpanel\dto\admin\AdminMessageRequestDto.java
 E:\IdeaProjects\ai-tgbot\api\src\main\java\app\telegramgptbot\adminpanel\security\CustomUserDetailsService.java
 E:\IdeaProjects\ai-tgbot\api\src\main\java\app\telegramgptbot\adminpanel\exception\RegistrationException.java
+E:\IdeaProjects\ai-tgbot\api\src\main\java\app\telegramgptbot\telegrambot\command\MessageAdmin.java
 E:\IdeaProjects\ai-tgbot\api\src\main\java\app\telegramgptbot\adminpanel\dto\chatlog\ChatLogResponseDto.java
 E:\IdeaProjects\ai-tgbot\api\src\main\java\app\telegramgptbot\telegrambot\command\SendMessageCommand.java
 E:\IdeaProjects\ai-tgbot\api\src\main\java\app\telegramgptbot\adminpanel\validation\FieldsValueMatch.java

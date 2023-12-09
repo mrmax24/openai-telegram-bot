@@ -26,7 +26,7 @@
     <tr *ngFor="let chat of chatList">
       <td (click)="onChatIdClick(chat.chatId)" class="chat-id-link">{{ chat.chatId }}</td>
       <td>{{ chat.tgUsername ? chat.tgUsername : 'no username' }}</td>
-      <td>{{ chat.userMessage }}</td>
+      <td class="message-column">{{ chat.userMessage.startsWith('toAdmin: ') ? chat.userMessage.substring('toAdmin: '.length) : chat.userMessage }}</td>
       <td>{{ chat.userMessageCount }}</td>
       <td>{{ chat.chatResponseCount }}</td>
       <td>{{ chat.adminResponseCount }}</td>

@@ -18,7 +18,8 @@ public class AuthenticationService {
     public AdminLoginResponseDto authenticate(AdminLoginRequestDto requestDto) {
         try {
             final Authentication authentication = authenticationManager.authenticate(
-                    new UsernamePasswordAuthenticationToken(requestDto.getEmail(), requestDto.getPassword()));
+                    new UsernamePasswordAuthenticationToken(requestDto.getEmail(),
+                            requestDto.getPassword()));
             String token = jwtUtil.generateToken(authentication.getName());
             return new AdminLoginResponseDto(token);
         } catch (Exception e) {

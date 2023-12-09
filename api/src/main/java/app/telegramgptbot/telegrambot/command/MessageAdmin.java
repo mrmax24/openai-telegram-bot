@@ -13,7 +13,7 @@ public class MessageAdmin implements Command {
 
     @Override
     public void execute() {
-        String message = "Your message is sent to admin. We will reply shortly.";
+        String message = "You can write message to admin";
         telegramBot.sendMessage(chatId, message);
     }
 }

@@ -1,9 +1,8 @@
 package app.telegramgptbot.adminpanel.dto.chatlog;
 
+import java.time.LocalDateTime;
 import lombok.Getter;
 import lombok.Setter;
-
-import java.time.LocalDateTime;
 
 @Getter
 @Setter
@@ -15,7 +14,7 @@ public class ChatLogRequestDto {
     private String chatResponse;
     private String adminResponse;
     private LocalDateTime userMessageTime;
-    private LocalDateTime  chatResponseTime;
+    private LocalDateTime chatResponseTime;
     private LocalDateTime adminResponseTime;
 
     public ChatLogRequestDto(Long chatId, String tgUsername,
