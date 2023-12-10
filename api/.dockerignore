@@ -1,15 +1,15 @@
-# Виключити всі файли та каталоги, які необхідно ігнорувати під час будівництва образу Docker
+# Exclude all files and directories that should be ignored during Docker image build
 
-# Файли, які генеруються в процесі будівництва (наприклад, вихідні файли збірки)
+# Files generated during the build process (e.g., build output files)
 ../target/
 
-# Кеш та тимчасові файли системи будівництва
+# Cache and temporary build system files
 node_modules/
 build/
 dist/
 *.log
 
-# Всі файли та каталоги, які не повинні потрапляти в Docker-образ
+# All files and directories that should not go into the Docker image
 .git/
 .idea/
 .vscode/
