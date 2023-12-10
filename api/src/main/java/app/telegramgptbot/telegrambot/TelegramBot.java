@@ -14,7 +14,6 @@ import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
-
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
@@ -37,7 +36,7 @@ public class TelegramBot extends TelegramLongPollingBot {
     private final TelegramBotConfig telegramBotConfig;
     private final ChatGptService chatGptService;
     private final ChatLogService chatLogService;
-    private Map<Long, Boolean> adminMessagePending = new HashMap<>();
+    private final Map<Long, Boolean> adminMessagePending = new HashMap<>();
 
     @Override
     public String getBotUsername() {
@@ -57,6 +56,9 @@ public class TelegramBot extends TelegramLongPollingBot {
     }
 
     private void handleMessage(Message message) {
+        String chatGptResponse;
+        long chatGptResponseTime = 0;
+
         String userMessage = message.getText();
         long userMessageReceivedTime = System.currentTimeMillis();
 
@@ -64,8 +66,6 @@ public class TelegramBot extends TelegramLongPollingBot {
         User user = message.getFrom();
         String userName = user.getUserName();
         String fullName = getFullName(user);
-        String chatGptResponse = null;
-        long chatGptResponseTime = 0;
 
         try {
             sendTypingAction(chatId);
@@ -113,8 +113,7 @@ public class TelegramBot extends TelegramLongPollingBot {
                              String chatGptResponse, long userMessageReceivedTime,
                              long chatGptResponseTime) {
         LocalDateTime checkedChatGptResponseTime = (chatGptResponseTime != 0)
-                ? new Timestamp(chatGptResponseTime).toLocalDateTime()
-                : null;
+                ? new Timestamp(chatGptResponseTime).toLocalDateTime() : null;
         chatLogService.save(new ChatLogRequestDto(chatId, userName, fullName, userMessage,
                 chatGptResponse, new Timestamp(userMessageReceivedTime).toLocalDateTime(),
                 checkedChatGptResponseTime));

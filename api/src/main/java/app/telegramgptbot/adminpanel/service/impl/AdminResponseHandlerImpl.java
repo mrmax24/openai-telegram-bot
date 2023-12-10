@@ -2,7 +2,6 @@ package app.telegramgptbot.adminpanel.service.impl;
 
 import app.telegramgptbot.adminpanel.dto.admin.AdminMessageResponseDto;
 import app.telegramgptbot.adminpanel.dto.chatlog.ChatLogResponseDto;
-import app.telegramgptbot.adminpanel.mapper.ChatLogMapper;
 import app.telegramgptbot.adminpanel.service.AdminResponseHandler;
 import app.telegramgptbot.adminpanel.service.ChatLogService;
 import app.telegramgptbot.telegrambot.TelegramBot;
