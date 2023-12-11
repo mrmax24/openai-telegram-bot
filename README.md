@@ -1,4 +1,4 @@
-# Telegram bot + OpenAi (SpringBoot/Angular)
+# Telegram bot 🤖 + OpenAi 💬 (SpringBoot/Angular)
 ## Project description:
 ```
 A Telegram chat bot integrated with ChatGPT, provided with an administrator panel designed to monitor
@@ -25,7 +25,7 @@ with integrated functionality for interacting with ChatGPT.
 that handles the logic, user interactions, and communication with the backend in an Angular application.
 - **Services** - manage the communication with the backend, encapsulating data retrieval, business logic, and interactions between components.
 - **Modules** - organize the Angular application into cohesive blocks, facilitating modularity, encapsulation, and maintainability.
-- **Assets** - Contains static assets like images or fonts used in the application.
+- **Assets** - contains static assets like images or fonts used in the application.
 
 ## Used technologies and libraries:
 | Technology               | Version  |
@@ -49,13 +49,30 @@ that handles the logic, user interactions, and communication with the backend in
 | `Checkstyle`             | `3.1.1`  |
 | `Docker`                 | `24.0.6` |
 
+## Technical details
+- **Entities** represent columns in the database;
+- **REST** is an architectural style for defining URL structures and interactions with resources
+- **DTOs** represent communication between Presentation and Service layers;
+- **DTO mappers** convert DTOs to entities and vice versa
+- **BCryptPasswordEncoder** is used for password encryption
+- **Hibernate annotations** are used for field validation
+- **Custom annotations** are used for email and password validation
+- **Jackson API** is responsible for converting objects to JSON
+- **JWT-token** provides URL-safe means of representing claims to be transferred between two parties
+- **Docker** allows to containerize app for efficient data management
+- **CORS** allows you to specify which domains have access to resources on your server.
+- **GlobalExceptionHandler** providing a uniform way to handle errors and respond with customized messages
+- **Config package** contains classes allow to configure Spring Security and mapping
+- **Security package** contains classes, allows to create UserDetails which store user information,
+create and validate JWT token and authenticate;
+
 
 ## Steps to run the program on your computer:
 1. Clone the repo: https://github.com/mrmax24/openai-telegram-bot;
 2. Install PostgreSQL;
 3. Create new schema in database;
-4. Add you DB properties to application.properties file;
-6. Create connection to DB using Database option (Intellij Idea Ultimate);
-7. Install Angular CLI in /frontend using command npm install -g @angular/cli;
-8. Run Angular using command ng serve;
-8. Done. Now just run Spring and navigate to http://localhost:4200/;
+4. Add you DB properties to **application.properties** file;
+5. Create connection to DB using Database option (Intellij Idea Ultimate);
+6. Install Angular CLI in **/frontend** using command `npm install -g @angular/cli`;
+7. Run Angular using command `ng serve`;
+8. Done. Now just run Spring and navigate to http://localhost:4200;
