@@ -20,7 +20,7 @@ Telegram bot part:
 - **Telegram bot logic** - contains logic enabling data exchange between the bot and the interface, 
 with integrated functionality for interacting with ChatGPT.
 
-#### <u>Frontend</u>
+#### <u>FRONTEND</u>
 - **Components** - contains the HTML and CSS defining a specific page or UI element, along with TypeScript code 
 that handles the logic, user interactions, and communication with the backend in an Angular application.
 - **Services** - manage the communication with the backend, encapsulating data retrieval, business logic, and interactions between components.
